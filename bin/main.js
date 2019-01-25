@@ -2,7 +2,7 @@
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const app_version_1 = require("./app_version");
+const app_version_1 = require("./app-version");
 const mdlinkc_1 = require("mdlinkc");
 function greeter(msg) {
     return msg;

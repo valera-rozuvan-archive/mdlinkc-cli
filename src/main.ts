@@ -1,4 +1,4 @@
-import { AppVersion } from './app_version';
+import { AppVersion } from './app-version';
 import { Mdlinkc } from 'mdlinkc';
 
 function greeter(msg: string) {

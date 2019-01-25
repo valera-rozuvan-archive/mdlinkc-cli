@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const pjson = require('../../package.json');
 exports.AppVersion = {
-    version: '0.0.2'
+    version: pjson.version
 };
 //# sourceMappingURL=index.js.map
