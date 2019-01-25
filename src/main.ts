@@ -1,4 +1,5 @@
 import { AppVersion } from './app_version';
+import { Mdlinkc } from 'mdlinkc';
 
 function greeter(msg: string) {
   return msg;
@@ -7,3 +8,8 @@ function greeter(msg: string) {
 const helloMsg = `mdlinkc v${AppVersion.version}`;
 
 console.log(greeter(helloMsg));
+console.log('');
+
+Mdlinkc.getLinks().forEach((link, id) => {
+  console.log(`[link ${id}]: ${link}`);
+});
