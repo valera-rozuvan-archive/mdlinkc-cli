@@ -12,7 +12,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const mdlinkc_1 = require("mdlinkc");
 const chalk = require("chalk");
-const path = require("path");
+const { add, λ } = require('lambda-math');
 const app_version_1 = require("./app-version");
 function greeter(msg) {
     return msg;
@@ -20,64 +20,54 @@ function greeter(msg) {
 const helloMsg = `mdlinkc-cli v${app_version_1.AppVersion.version}`;
 console.log(greeter(helloMsg));
 console.log('');
+const CWD = process.cwd();
 const passSymbol = '\u2714';
 const failSymbol = '\u2716';
-function testDir(dirName) {
-    return __awaiter(this, void 0, void 0, function* () {
-        let status = yield mdlinkc_1.Mdlinkc.checkIfDirExists(dirName);
-        if (status) {
-            console.log(`[${chalk.green(passSymbol)}] ${chalk.bold(dirName)} directory exists.`);
-            return 1;
-        }
-        else {
-            console.log(`[${chalk.red(failSymbol)}] ${chalk.bold(dirName)} directory does NOT exist.`);
-            return 0;
-        }
-    });
-}
 function checkRequiredDirs() {
     return __awaiter(this, void 0, void 0, function* () {
-        let testDirCounter = 0;
         const dirsToTest = ['templates', 'contents', 'configs', 'scripts'];
-        for (let c1 = 0; c1 < dirsToTest.length; c1 += 1) {
-            const dir = dirsToTest[c1];
-            testDirCounter += yield testDir(dir);
+        let c1 = 0;
+        λ.reset();
+        λ(add, [0, 0]);
+        for (c1 = 0; c1 < dirsToTest.length; c1 += 1) {
+            const dirName = dirsToTest[c1];
+            const status = yield mdlinkc_1.Mdlinkc.checkIfDirExists(CWD, dirName);
+            if (status === true) {
+                console.log(`[${chalk.green(passSymbol)}] ${chalk.bold(dirName)} directory exists.`);
+                λ(add, [λ[c1], 1]);
+            }
+            else {
+                console.log(`[${chalk.red(failSymbol)}] ${chalk.bold(dirName)} directory does NOT exist.`);
+                λ(add, [λ[c1], 0]);
+            }
         }
-        if (testDirCounter !== 4) {
+        if (λ[c1].number !== 4) {
             console.log('');
             console.log('Some directories are missing. Exiting ...');
             process.exit(1);
         }
     });
 }
-function loadConfigFile(configName) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const shortPath = `./configs/${configName}.js`;
-        const fullPath = path.join(process.cwd(), shortPath);
-        let config;
-        try {
-            config = require(fullPath);
-            console.log(`[${chalk.green(passSymbol)}] ${chalk.bold(shortPath)} config file was loaded.`);
-            return config;
-        }
-        catch (err) {
-            console.log(`[${chalk.red(failSymbol)}] ${chalk.bold(shortPath)} config file could NOT be loaded.`);
-            return null;
-        }
-    });
-}
 function loadAllConfigs(configs) {
     return __awaiter(this, void 0, void 0, function* () {
-        let configCounter = 0;
         const configsToLoad = ['pages', 'variables', 'meta'];
-        for (let c1 = 0; c1 < configsToLoad.length; c1 += 1) {
+        let c1 = 0;
+        λ.reset();
+        λ(add, [0, 0]);
+        for (c1 = 0; c1 < configsToLoad.length; c1 += 1) {
             const configName = configsToLoad[c1];
-            configs[configName] = yield loadConfigFile(configName);
-            if (configs[configName] !== null) {
-                configCounter += 1;
+            let config = yield mdlinkc_1.Mdlinkc.loadConfigFile(CWD, configName);
+            if (config !== null) {
+                console.log(`[${chalk.green(passSymbol)}] ${chalk.bold(configName)} config file was loaded.`);
+                configs[configName] = config;
+                λ(add, [λ[c1], 1]);
+            }
+            else {
+                console.log(`[${chalk.red(failSymbol)}] ${chalk.bold(configName)} config file could NOT be loaded.`);
+                λ(add, [λ[c1], 0]);
             }
         }
-        if (configCounter !== 3) {
+        if (λ[c1].number !== 3) {
             console.log('');
             console.log('Some configs are missing. Exiting ...');
             process.exit(1);

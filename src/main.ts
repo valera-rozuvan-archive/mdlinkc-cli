@@ -2,6 +2,8 @@ import { Mdlinkc } from 'mdlinkc';
 import * as chalk from 'chalk'
 import * as path from 'path'
 
+const { add, λ } = require('lambda-math')
+
 import { AppVersion } from './app-version';
 
 function greeter(msg: string) {
@@ -12,62 +14,60 @@ const helloMsg = `mdlinkc-cli v${AppVersion.version}`;
 console.log(greeter(helloMsg));
 console.log('');
 
+const CWD = process.cwd()
+
 const passSymbol = '\u2714'
 const failSymbol = '\u2716'
 
-async function testDir(dirName) {
-  let status = await Mdlinkc.checkIfDirExists(dirName)
-
-  if (status) {
-    console.log(`[${chalk.green(passSymbol)}] ${chalk.bold(dirName)} directory exists.`)
-    return 1
-  } else {
-    console.log(`[${chalk.red(failSymbol)}] ${chalk.bold(dirName)} directory does NOT exist.`)
-    return 0
-  }
-}
-
 async function checkRequiredDirs() {
-  let testDirCounter = 0
   const dirsToTest = ['templates', 'contents', 'configs', 'scripts']
-  for (let c1 = 0; c1 < dirsToTest.length; c1 += 1) {
-    const dir = dirsToTest[c1]
-    testDirCounter += await testDir(dir)
+  let c1 = 0
+
+  λ.reset()
+  λ(add, [0, 0])
+
+  for (c1 = 0; c1 < dirsToTest.length; c1 += 1) {
+    const dirName = dirsToTest[c1]
+    const status = await Mdlinkc.checkIfDirExists(CWD, dirName)
+
+    if (status === true) {
+      console.log(`[${chalk.green(passSymbol)}] ${chalk.bold(dirName)} directory exists.`)
+      λ(add, [λ[c1], 1])
+    } else {
+      console.log(`[${chalk.red(failSymbol)}] ${chalk.bold(dirName)} directory does NOT exist.`)
+      λ(add, [λ[c1], 0])
+    }
   }
-  if (testDirCounter !== 4) {
+
+  if (λ[c1].number !== 4) {
     console.log('')
     console.log('Some directories are missing. Exiting ...')
     process.exit(1)
   }
 }
 
-async function loadConfigFile(configName) {
-  const shortPath = `./configs/${configName}.js`
-  const fullPath = path.join(process.cwd(), shortPath)
-
-  let config
-  try {
-    config = require(fullPath)
-    console.log(`[${chalk.green(passSymbol)}] ${chalk.bold(shortPath)} config file was loaded.`)
-    return config
-  } catch (err) {
-    console.log(`[${chalk.red(failSymbol)}] ${chalk.bold(shortPath)} config file could NOT be loaded.`)
-    return null
-  }
-}
-
 async function loadAllConfigs(configs) {
-  let configCounter = 0
   const configsToLoad = ['pages', 'variables', 'meta']
-  for (let c1 = 0; c1 < configsToLoad.length; c1 += 1) {
-    const configName = configsToLoad[c1]
-    configs[configName] = await loadConfigFile(configName)
+  let c1 = 0
 
-    if (configs[configName] !== null) {
-      configCounter += 1
+  λ.reset()
+  λ(add, [0, 0])
+
+  for (c1 = 0; c1 < configsToLoad.length; c1 += 1) {
+    const configName = configsToLoad[c1]
+    let config = await Mdlinkc.loadConfigFile(CWD, configName)
+
+    if (config !== null) {
+      console.log(`[${chalk.green(passSymbol)}] ${chalk.bold(configName)} config file was loaded.`)
+      configs[configName] = config
+      λ(add, [λ[c1], 1])
+    } else {
+      console.log(`[${chalk.red(failSymbol)}] ${chalk.bold(configName)} config file could NOT be loaded.`)
+      λ(add, [λ[c1], 0])
     }
   }
-  if (configCounter !== 3) {
+
+  if (λ[c1].number !== 3) {
     console.log('')
     console.log('Some configs are missing. Exiting ...')
     process.exit(1)

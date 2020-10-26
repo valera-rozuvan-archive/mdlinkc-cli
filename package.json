@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "chalk": "^4.1.0",
-    "mdlinkc": "0.0.4"
+    "lambda-math": "^0.1.1",
+    "mdlinkc": "0.0.7"
   },
   "devDependencies": {
     "@types/node": "10.12.18",

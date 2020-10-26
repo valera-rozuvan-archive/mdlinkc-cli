@@ -18,6 +18,11 @@
         "color-convert": "^2.0.1"
       }
     },
+    "bignumber.js": {
+      "version": "9.0.0",
+      "resolved": "https://registry.npmjs.org/bignumber.js/-/bignumber.js-9.0.0.tgz",
+      "integrity": "sha512-t/OYhhJ2SD+YGBQcjY8GzzDHEk9f3nerxjtfa6tlMXfe7frs/WozhvCNoGvpM0P3bNf3Gq5ZRMlGr5f3r4/N8A=="
+    },
     "chalk": {
       "version": "4.1.0",
       "resolved": "https://registry.npmjs.org/chalk/-/chalk-4.1.0.tgz",
@@ -45,15 +50,39 @@
       "resolved": "https://registry.npmjs.org/has-flag/-/has-flag-4.0.0.tgz",
       "integrity": "sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ=="
     },
+    "lambda-math": {
+      "version": "0.1.1",
+      "resolved": "https://registry.npmjs.org/lambda-math/-/lambda-math-0.1.1.tgz",
+      "integrity": "sha512-GlLpjBtgoNTAUUTLOTRmm8Ez5rhZWn5ifRhhjQBaC9bPL3l5EjaBO3Tar0CwHkN/PNAX2dGwOIav/tHbAuqGwg==",
+      "requires": {
+        "bignumber.js": "9.0.0"
+      }
+    },
     "mdlinkc": {
-      "version": "0.0.4",
-      "resolved": "https://registry.npmjs.org/mdlinkc/-/mdlinkc-0.0.4.tgz",
-      "integrity": "sha512-mOOvY8rVj3Mzll+puBdkih3GboP9uU7mmdjeAltTFfw3CGxnxfcrZBiXOEGrMViU5WQ98shfUPRwcH/GbWCv+w==",
+      "version": "0.0.7",
+      "resolved": "https://registry.npmjs.org/mdlinkc/-/mdlinkc-0.0.7.tgz",
+      "integrity": "sha512-JAVyZvIrBBEK8L7LwI/AFqvHtJUOnejLUgsHhRyAS8FkNPp5GsXgW6GPVEERFPNVvhyBz67dgvK59jPWaFVelg==",
+      "requires": {
+        "lambda-math": "^0.1.1"
+      },
       "dependencies": {
         "@types/node": {
           "version": "10.12.18",
           "resolved": "https://registry.npmjs.org/@types/node/-/node-10.12.18.tgz",
           "integrity": "sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ=="
+        },
+        "bignumber.js": {
+          "version": "9.0.0",
+          "resolved": "https://registry.npmjs.org/bignumber.js/-/bignumber.js-9.0.0.tgz",
+          "integrity": "sha512-t/OYhhJ2SD+YGBQcjY8GzzDHEk9f3nerxjtfa6tlMXfe7frs/WozhvCNoGvpM0P3bNf3Gq5ZRMlGr5f3r4/N8A=="
+        },
+        "lambda-math": {
+          "version": "0.1.1",
+          "resolved": "https://registry.npmjs.org/lambda-math/-/lambda-math-0.1.1.tgz",
+          "integrity": "sha512-GlLpjBtgoNTAUUTLOTRmm8Ez5rhZWn5ifRhhjQBaC9bPL3l5EjaBO3Tar0CwHkN/PNAX2dGwOIav/tHbAuqGwg==",
+          "requires": {
+            "bignumber.js": "9.0.0"
+          }
         },
         "typescript": {
           "version": "3.1.6",
