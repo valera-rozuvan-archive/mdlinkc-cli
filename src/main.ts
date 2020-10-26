@@ -1,10 +1,10 @@
 import { Mdlinkc } from 'mdlinkc';
 import * as chalk from 'chalk'
-import * as path from 'path'
 
 const { add, λ } = require('lambda-math')
 
 import { AppVersion } from './app-version';
+import { runProc } from './run_proc'
 
 function greeter(msg: string) {
   return msg;
@@ -89,6 +89,21 @@ async function printAuthorVariable(configs) {
   console.log('configs.variables.AUTHOR = ', configs.variables.AUTHOR)
 }
 
+async function processPages(configs) {
+  let c1 = 0
+
+  for (c1 = 0; c1 < configs.pages.length; c1 += 1) {
+    const pageConfig = configs.pages[c1]
+    const results = await runProc(CWD, pageConfig, configs)
+
+    console.log(
+      'child process exited with ' +
+      `code ${results.code} and signal ${results.signal}.`
+    )
+    console.log('')
+  }
+}
+
 async function run(configs) {
   console.log('[DIRS]')
   await checkRequiredDirs()
@@ -106,6 +121,8 @@ async function run(configs) {
 
   await printAuthorVariable(configs)
   console.log('')
+
+  await processPages(configs)
 }
 
 const configs = {
