@@ -21,7 +21,8 @@
     "clean": "rm -rf ./bin/*"
   },
   "dependencies": {
-    "mdlinkc": "0.0.3"
+    "chalk": "^4.1.0",
+    "mdlinkc": "0.0.4"
   },
   "devDependencies": {
     "@types/node": "10.12.18",
