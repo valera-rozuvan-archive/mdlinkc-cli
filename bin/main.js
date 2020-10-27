@@ -51,7 +51,7 @@ function checkRequiredDirs() {
 }
 function loadAllConfigs(configs) {
     return __awaiter(this, void 0, void 0, function* () {
-        const configsToLoad = ['pages', 'variables', 'meta'];
+        const configsToLoad = ['docs', 'variables', 'meta'];
         let c1 = 0;
         λ.reset();
         λ(add, [0, 0]);
@@ -81,10 +81,10 @@ function printNumThreads(configs) {
         console.log('configs.meta.threads = ', configs.meta.threads);
     });
 }
-function printFirstPage(configs) {
+function printFirstDoc(configs) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log('configs.pages = ', configs.pages);
-        console.log('configs.pages[0] = ', configs.pages[0]);
+        console.log('configs.docs = ', configs.docs);
+        console.log('configs.docs[0] = ', configs.docs[0]);
     });
 }
 function printAuthorVariable(configs) {
@@ -93,12 +93,12 @@ function printAuthorVariable(configs) {
         console.log('configs.variables.AUTHOR = ', configs.variables.AUTHOR);
     });
 }
-function processPages(configs) {
+function processDocs(configs) {
     return __awaiter(this, void 0, void 0, function* () {
         let c1 = 0;
-        for (c1 = 0; c1 < configs.pages.length; c1 += 1) {
-            const pageConfig = configs.pages[c1];
-            const results = yield run_proc_1.runProc(CWD, pageConfig, configs);
+        for (c1 = 0; c1 < configs.docs.length; c1 += 1) {
+            const docConfig = configs.docs[c1];
+            const results = yield run_proc_1.runProc(CWD, docConfig, configs);
             console.log('child process exited with ' +
                 `code ${results.code} and signal ${results.signal}.`);
             console.log('');
@@ -115,15 +115,15 @@ function run(configs) {
         console.log('');
         yield printNumThreads(configs);
         console.log('');
-        yield printFirstPage(configs);
+        yield printFirstDoc(configs);
         console.log('');
         yield printAuthorVariable(configs);
         console.log('');
-        yield processPages(configs);
+        yield processDocs(configs);
     });
 }
 const configs = {
-    pages: null,
+    docs: null,
     variables: null,
     meta: null
 };

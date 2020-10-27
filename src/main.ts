@@ -47,7 +47,7 @@ async function checkRequiredDirs() {
 }
 
 async function loadAllConfigs(configs) {
-  const configsToLoad = ['pages', 'variables', 'meta']
+  const configsToLoad = ['docs', 'variables', 'meta']
   let c1 = 0
 
   λ.reset()
@@ -79,9 +79,9 @@ async function printNumThreads(configs) {
   console.log('configs.meta.threads = ', configs.meta.threads)
 }
 
-async function printFirstPage(configs) {
-  console.log('configs.pages = ', configs.pages)
-  console.log('configs.pages[0] = ', configs.pages[0])
+async function printFirstDoc(configs) {
+  console.log('configs.docs = ', configs.docs)
+  console.log('configs.docs[0] = ', configs.docs[0])
 }
 
 async function printAuthorVariable(configs) {
@@ -89,12 +89,12 @@ async function printAuthorVariable(configs) {
   console.log('configs.variables.AUTHOR = ', configs.variables.AUTHOR)
 }
 
-async function processPages(configs) {
+async function processDocs(configs) {
   let c1 = 0
 
-  for (c1 = 0; c1 < configs.pages.length; c1 += 1) {
-    const pageConfig = configs.pages[c1]
-    const results = await runProc(CWD, pageConfig, configs)
+  for (c1 = 0; c1 < configs.docs.length; c1 += 1) {
+    const docConfig = configs.docs[c1]
+    const results = await runProc(CWD, docConfig, configs)
 
     console.log(
       'child process exited with ' +
@@ -116,17 +116,17 @@ async function run(configs) {
   await printNumThreads(configs)
   console.log('')
 
-  await printFirstPage(configs)
+  await printFirstDoc(configs)
   console.log('')
 
   await printAuthorVariable(configs)
   console.log('')
 
-  await processPages(configs)
+  await processDocs(configs)
 }
 
 const configs = {
-  pages: null,
+  docs: null,
   variables: null,
   meta: null
 }
