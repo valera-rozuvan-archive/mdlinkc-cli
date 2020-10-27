@@ -124,4 +124,3 @@ const configs = {
     meta: null
 };
 run(configs);
-//# sourceMappingURL=main.js.map

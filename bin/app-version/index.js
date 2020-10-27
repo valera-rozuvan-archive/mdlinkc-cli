@@ -4,4 +4,3 @@ const pjson = require('../../package.json');
 exports.AppVersion = {
     version: pjson.version
 };
-//# sourceMappingURL=index.js.map
