@@ -51,9 +51,9 @@
       "integrity": "sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ=="
     },
     "lambda-math": {
-      "version": "0.1.1",
-      "resolved": "https://registry.npmjs.org/lambda-math/-/lambda-math-0.1.1.tgz",
-      "integrity": "sha512-GlLpjBtgoNTAUUTLOTRmm8Ez5rhZWn5ifRhhjQBaC9bPL3l5EjaBO3Tar0CwHkN/PNAX2dGwOIav/tHbAuqGwg==",
+      "version": "0.2.0",
+      "resolved": "https://registry.npmjs.org/lambda-math/-/lambda-math-0.2.0.tgz",
+      "integrity": "sha512-X5xK35o3XNfj32svvzEj3WpmeBb5m1J1q+UeVakpSyp/undl8O+9kXNxIZTd6iBrjiP9S9ea+dhvYBXUfHChuQ==",
       "requires": {
         "bignumber.js": "9.0.0"
       }

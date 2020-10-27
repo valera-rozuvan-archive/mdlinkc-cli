@@ -21,8 +21,8 @@
     "clean": "rm -rf ./bin/*"
   },
   "dependencies": {
-    "chalk": "^4.1.0",
-    "lambda-math": "^0.1.1",
+    "chalk": "4.1.0",
+    "lambda-math": "0.2.0",
     "mdlinkc": "0.0.7"
   },
   "devDependencies": {

@@ -12,7 +12,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const mdlinkc_1 = require("mdlinkc");
 const chalk = require("chalk");
-const { add, λ } = require('lambda-math');
+const { add, λ, Ω } = require('lambda-math');
 const app_version_1 = require("./app-version");
 const run_proc_1 = require("./run_proc");
 function greeter(msg) {
@@ -28,21 +28,19 @@ function checkRequiredDirs() {
     return __awaiter(this, void 0, void 0, function* () {
         const dirsToTest = ['templates', 'contents', 'configs', 'scripts'];
         let c1 = 0;
-        λ.reset();
         λ(add, [0, 0]);
         for (c1 = 0; c1 < dirsToTest.length; c1 += 1) {
             const dirName = dirsToTest[c1];
             const status = yield mdlinkc_1.Mdlinkc.checkIfDirExists(CWD, dirName);
             if (status === true) {
                 console.log(`[${chalk.green(passSymbol)}] ${chalk.bold(dirName)} directory exists.`);
-                λ(add, [λ[c1], 1]);
+                λ(add, [Ω(1), 1]);
             }
             else {
                 console.log(`[${chalk.red(failSymbol)}] ${chalk.bold(dirName)} directory does NOT exist.`);
-                λ(add, [λ[c1], 0]);
             }
         }
-        if (λ[c1].number !== 4) {
+        if (Ω(1).number !== 4) {
             console.log('');
             console.log('Some directories are missing. Exiting ...');
             process.exit(1);
@@ -53,7 +51,6 @@ function loadAllConfigs(configs) {
     return __awaiter(this, void 0, void 0, function* () {
         const configsToLoad = ['docs', 'variables', 'meta'];
         let c1 = 0;
-        λ.reset();
         λ(add, [0, 0]);
         for (c1 = 0; c1 < configsToLoad.length; c1 += 1) {
             const configName = configsToLoad[c1];
@@ -61,14 +58,13 @@ function loadAllConfigs(configs) {
             if (config !== null) {
                 console.log(`[${chalk.green(passSymbol)}] ${chalk.bold(configName)} config file was loaded.`);
                 configs[configName] = config;
-                λ(add, [λ[c1], 1]);
+                λ(add, [Ω(1), 1]);
             }
             else {
                 console.log(`[${chalk.red(failSymbol)}] ${chalk.bold(configName)} config file could NOT be loaded.`);
-                λ(add, [λ[c1], 0]);
             }
         }
-        if (λ[c1].number !== 3) {
+        if (Ω(1).number !== 3) {
             console.log('');
             console.log('Some configs are missing. Exiting ...');
             process.exit(1);

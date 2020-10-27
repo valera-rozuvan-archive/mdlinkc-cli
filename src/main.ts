@@ -1,7 +1,7 @@
 import { Mdlinkc } from 'mdlinkc';
 import * as chalk from 'chalk'
 
-const { add, λ } = require('lambda-math')
+const { add, λ, Ω } = require('lambda-math')
 
 import { AppVersion } from './app-version';
 import { runProc } from './run_proc'
@@ -23,7 +23,6 @@ async function checkRequiredDirs() {
   const dirsToTest = ['templates', 'contents', 'configs', 'scripts']
   let c1 = 0
 
-  λ.reset()
   λ(add, [0, 0])
 
   for (c1 = 0; c1 < dirsToTest.length; c1 += 1) {
@@ -32,14 +31,13 @@ async function checkRequiredDirs() {
 
     if (status === true) {
       console.log(`[${chalk.green(passSymbol)}] ${chalk.bold(dirName)} directory exists.`)
-      λ(add, [λ[c1], 1])
+      λ(add, [Ω(1), 1])
     } else {
       console.log(`[${chalk.red(failSymbol)}] ${chalk.bold(dirName)} directory does NOT exist.`)
-      λ(add, [λ[c1], 0])
     }
   }
 
-  if (λ[c1].number !== 4) {
+  if (Ω(1).number !== 4) {
     console.log('')
     console.log('Some directories are missing. Exiting ...')
     process.exit(1)
@@ -50,7 +48,6 @@ async function loadAllConfigs(configs) {
   const configsToLoad = ['docs', 'variables', 'meta']
   let c1 = 0
 
-  λ.reset()
   λ(add, [0, 0])
 
   for (c1 = 0; c1 < configsToLoad.length; c1 += 1) {
@@ -60,14 +57,13 @@ async function loadAllConfigs(configs) {
     if (config !== null) {
       console.log(`[${chalk.green(passSymbol)}] ${chalk.bold(configName)} config file was loaded.`)
       configs[configName] = config
-      λ(add, [λ[c1], 1])
+      λ(add, [Ω(1), 1])
     } else {
       console.log(`[${chalk.red(failSymbol)}] ${chalk.bold(configName)} config file could NOT be loaded.`)
-      λ(add, [λ[c1], 0])
     }
   }
 
-  if (λ[c1].number !== 3) {
+  if (Ω(1).number !== 3) {
     console.log('')
     console.log('Some configs are missing. Exiting ...')
     process.exit(1)
